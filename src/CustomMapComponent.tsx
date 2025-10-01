@@ -47,8 +47,7 @@ export default function CustomMapComponent() {
 
     const paint = (sp: any, color: string, hover = color) =>
       mapView.updateState(sp, { color, hoverColor: hover });
-    const labelText = (sp: any, meta: any, a: number) =>
-      `${sp.name || sp.id} - ${a} მ²`;
+    const labelText = (sp: any, a: number) => `${sp.name || sp.id} - ${a} მ²`;
 
     const getMeta = (id: string) => stocksData.find((x) => x.id === id);
     const inRange = (a: number, [min, max]: [number, number]) =>
@@ -67,7 +66,7 @@ export default function CustomMapComponent() {
         if (!inRange(a, areaRange)) continue;
 
         paint(sp, FILTERED);
-        mapView.Labels.add(sp, labelText(sp, meta, a));
+        mapView.Labels.add(sp, labelText(sp, a));
       }
     }
 
@@ -77,7 +76,7 @@ export default function CustomMapComponent() {
       if (sp) {
         paint(sp, SELECTED);
         const meta = getMeta(selectedSpace.id);
-        mapView.Labels.add(sp, labelText(sp, meta, getArea(meta ?? {})));
+        mapView.Labels.add(sp, labelText(sp, getArea(meta ?? {})));
       }
     }
   }, [areaRange, selectedSpace?.id, mapView, spaces]);

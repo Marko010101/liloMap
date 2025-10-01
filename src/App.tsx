@@ -14,7 +14,7 @@ export default function App() {
 
   if (isLoading) return <MapSkeleton />;
   if (error) return <div className="p-4 text-red-600">{error.message}</div>;
-
+  const MapViewAny = MapView as unknown as React.FC<any>;
   return (
     <>
       <SpaceInfoDrawer />
@@ -24,7 +24,7 @@ export default function App() {
           <HeaderFilters />
         </header>
 
-        <MapView
+        <MapViewAny
           mapData={mapData}
           style={{
             height: "70vh",
@@ -34,7 +34,7 @@ export default function App() {
           }}
         >
           <CustomMapComponent />
-        </MapView>
+        </MapViewAny>
       </div>
     </>
   );
