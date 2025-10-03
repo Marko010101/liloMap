@@ -84,7 +84,6 @@ export default function AreaRangeFilter() {
     <Box
       sx={{
         width: '100%',
-        m: 3,
         pt: 2,
         borderTop: '1px solid',
         borderColor: 'divider',

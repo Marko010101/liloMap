@@ -5,10 +5,11 @@ import AreaRangeFilter from './AreaRangeFilter';
 import HeaderLogo from './HeaderLogo';
 import SectionSelector from './SectionSelector';
 import LeasingDebtLayer from './ui/LeasingDebtLayer';
+import ClearFilter from './ui/ClearFilter';
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
-  const sidebarWidth = '340px';
+  const sidebarWidth = '335px';
   const handleOffset = 13;
 
   const sidebarWidthNum = parseInt(sidebarWidth, 10);
@@ -44,8 +45,9 @@ const Sidebar = () => {
           position: 'relative',
         }}
       >
-        <aside className="flex h-screen w-max shrink-0 flex-col items-center gap-4 border-r border-gray-200 bg-white/70 px-8 py-4 backdrop-blur">
+        <aside className="flex h-screen w-max shrink-0 flex-col items-center gap-5 border-r border-gray-200 bg-white/70 px-8 py-4 backdrop-blur">
           <HeaderLogo />
+          <ClearFilter />
           <AreaRangeFilter />
           <SectionSelector />
           <Box
