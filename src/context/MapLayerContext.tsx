@@ -2,9 +2,9 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
 
 type LayerCtx = {
-  showDebt: boolean;
-  setShowDebt: (v: boolean) => void;
-  toggleDebt: () => void;
+  debtFilter: string;
+  setDebtFilter: (v: string) => void;
+  clearDebtFilter: () => void;
 };
 
 const MapLayerContext = createContext<LayerCtx | null>(null);
@@ -12,14 +12,15 @@ const MapLayerContext = createContext<LayerCtx | null>(null);
 export const MapLayerProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const [showDebt, setShowDebt] = useState(false);
+  const [debtFilter, setDebtFilter] = useState<string>('');
+
   const value = useMemo(
     () => ({
-      showDebt,
-      setShowDebt,
-      toggleDebt: () => setShowDebt((v) => !v),
+      debtFilter,
+      setDebtFilter,
+      clearDebtFilter: () => setDebtFilter(''),
     }),
-    [showDebt],
+    [debtFilter],
   );
 
   return (

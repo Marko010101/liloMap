@@ -4,8 +4,8 @@ import { useMemo, useState } from 'react';
 import AreaRangeFilter from './AreaRangeFilter';
 import HeaderLogo from './HeaderLogo';
 import SectionSelector from './SectionSelector';
-import LeasingDebtLayer from './ui/LeasingDebtLayer';
 import ClearFilter from './ui/ClearFilter';
+import LeasingDebtLayer from './ui/LeasingDebtLayer';
 import SearchField from './ui/SearchField';
 
 const Sidebar = () => {
@@ -38,7 +38,7 @@ const Sidebar = () => {
         elevation={3}
         sx={{
           height: '100%',
-          width: '100%',
+          width: '340px',
           borderTopLeftRadius: '20px',
           borderBottomLeftRadius: '20px',
           bgcolor: 'oklch(96.7% 0.003 264.542)',
@@ -46,14 +46,13 @@ const Sidebar = () => {
           position: 'relative',
         }}
       >
-        <aside className="flex h-screen w-max shrink-0 flex-col items-center gap-5 border-r border-gray-200 bg-white/70 px-8 py-4 backdrop-blur">
+        <aside className="flex h-screen w-full shrink-0 flex-col items-center gap-5 border-r border-gray-200 bg-white/70 px-8 py-4 backdrop-blur">
           <HeaderLogo />
           <ClearFilter />
           <AreaRangeFilter />
           <SectionSelector />
           <LeasingDebtLayer />
-
-          {/* <SearchField /> */}
+          <SearchField />
         </aside>
       </Paper>
 

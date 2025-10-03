@@ -10,12 +10,20 @@ export const Colors = {
     D: '#4caf50',
   },
 
-  debt: {
+  leasingDebt: {
     none: '#fff', // 0  (very light green)
     lt100: '#fee7d6', // 1–99  (peach)
     lt300: '#fdc8a2', // 100–299 (light orange)
     lt500: '#f89c74', // 300–499 (orange)
     lt700: '#e4572e', // 500–699 (deep orange)
     severe: '#b62020', // ≥700 (red)
+  },
+  leasingCost: {
+    none: '#fff', // 0  (very light green)
+    lt100: '#dcfce7', // 1–99  (light lime green)
+    lt300: '#7bf1a8', // 100–299 (light green)
+    lt500: '#00c951', // 300–499 (medium green)
+    lt700: '#008236', // 500–699 (deep green)
+    severe: '#016630', // ≥700 (dark green)
   },
 } as const;

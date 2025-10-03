@@ -6,9 +6,9 @@ import { useSection } from '../context/SectionContext';
 import { useSelectedSpace } from '../context/SelectedSpaceContext';
 import { Colors } from '../data/Colors';
 import stocksData from '../data/stocks';
-import { getDebtColor, matchStock } from '../helpers/spaceHelpers';
 import { getCircular } from '../service/images';
 import { useMapLayers } from '../context/MapLayerContext';
+import { getMetricColor, matchStock } from '../helpers/spaceHelpers';
 
 export default function CustomMapComponent() {
   const { mapData, mapView } = useMap();
@@ -16,8 +16,8 @@ export default function CustomMapComponent() {
     useSelectedSpace();
   const { areaRange } = useMapFilters();
   const { selected: selectedSections } = useSection();
-  const { showDebt } = useMapLayers();
-  // console.log('showDebt', showDebt);
+  const { debtFilter } = useMapLayers();
+  console.log('selectedSpace', selectedSpace);
 
   const spaces = useMemo(
     () => (mapData ? mapData.getByType('space') : []),
@@ -101,19 +101,25 @@ export default function CustomMapComponent() {
       });
     }
 
-    if (showDebt) {
+    if (debtFilter) {
       spaceByIdRef.current.forEach((sp) => {
         const stocks = matchStock(sp.id);
         if (!stocks) return;
 
-        const color = getDebtColor(stocks.leasingDebt);
-        mapView.updateState(sp, {
-          color,
-          hoverColor: color,
-        });
+        const isDebt = debtFilter === 'leasingDebt';
+        const value = isDebt
+          ? (stocks.leasingDebt ?? 0)
+          : (stocks.leasingCost ?? 0);
+        const color = getMetricColor(
+          isDebt ? 'leasingDebt' : 'leasingCost',
+          value,
+        );
+
+        mapView.updateState(sp, { color, hoverColor: color });
+
         mapView.Labels.add(
           sp,
-          `${sp.name || sp.id} • ვალი: ${stocks.leasingDebt} ₾`,
+          `${sp.name || sp.id} • ${isDebt ? 'ვალი' : 'ქირა'}: ${value} ₾`,
         );
       });
     }
@@ -143,7 +149,7 @@ export default function CustomMapComponent() {
     mapView,
     spaces,
     selectedSections,
-    showDebt,
+    debtFilter,
   ]);
 
   // Click: select valid spaces, otherwise close the drawer

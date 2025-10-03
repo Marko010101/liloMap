@@ -9,13 +9,13 @@ import { useSelectedSpace } from '../../context/SelectedSpaceContext';
 const ClearFilter = () => {
   const { setAreaRange } = useMapFilters();
   const { clear: clearSections } = useSection();
-  const { setShowDebt } = useMapLayers();
+  const { clearDebtFilter } = useMapLayers();
   const { clearSelectedSpace } = useSelectedSpace();
 
   const handleClearFilters = () => {
     setAreaRange(null);
     clearSections();
-    setShowDebt(false);
+    clearDebtFilter();
     clearSelectedSpace();
   };
 
