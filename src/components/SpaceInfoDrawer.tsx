@@ -1,66 +1,90 @@
-import Drawer from "@mui/material/Drawer";
-import { IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import { useSelectedSpace } from "../context/SelectedSpaceContext";
+// SpaceInfoDrawer.tsx
+import CloseIcon from '@mui/icons-material/Close';
+import { ClickAwayListener, IconButton, Paper } from '@mui/material';
+import { useEffect } from 'react';
+import { useSelectedSpace } from '../context/SelectedSpaceContext';
 
 export function SpaceInfoDrawer() {
   const { selectedSpace, clearSelectedSpace } = useSelectedSpace();
+  const open = !!selectedSpace;
+
+  // Close on Esc
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') clearSelectedSpace();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [open, clearSelectedSpace]);
+
+  if (!open) return null;
 
   return (
-    <Drawer
-      anchor="right"
-      open={!!selectedSpace}
-      onClose={clearSelectedSpace}
-      PaperProps={{
-        sx: {
-          width: 320,
-          borderTopLeftRadius: "20px",
-          borderBottomLeftRadius: "20px",
-          padding: 2,
-          bgcolor: "oklch(96.7% 0.003 264.542)",
-        },
-      }}
-      BackdropProps={{
-        sx: {
-          backgroundColor: "rgba(0,0,0,0.1)",
-        },
+    <ClickAwayListener
+      onClickAway={(e) => {
+        const mapRoot = document.getElementById('map-root');
+        if (mapRoot && e.target instanceof Node && mapRoot.contains(e.target))
+          return;
+        clearSelectedSpace();
       }}
     >
-      {selectedSpace && (
-        <div className="flex flex-col gap-4">
-          <div className="flex justify-between items-center p-5">
-            <h2 className="font-semibold text-lg">ინფორმაცია</h2>
+      <Paper
+        elevation={3}
+        sx={{
+          position: 'fixed',
+          top: 0,
+          right: 0,
+          height: '100vh',
+          width: 320,
+          borderTopLeftRadius: '20px',
+          borderBottomLeftRadius: '20px',
+          p: 2,
+          bgcolor: 'oklch(96.7% 0.003 264.542)',
+          zIndex: (theme) => theme.zIndex.drawer,
+          pointerEvents: 'none',
+        }}
+      >
+        <div style={{ pointerEvents: 'auto' }}>
+          <div className="flex items-center justify-between px-0 py-2">
+            <h2 className="text-lg font-semibold">ინფორმაცია</h2>
             <IconButton size="small" onClick={clearSelectedSpace}>
               <CloseIcon />
             </IconButton>
           </div>
-          <ul className="flex flex-col gap-3 text-sm">
-            <div className="flex justify-center items-center">
+
+          <ul className="mt-3 flex w-max flex-col gap-6 px-5 text-sm">
+            <div className="flex flex-col items-center justify-center gap-3">
+              <li>
+                <b>მფლობელი:</b> {selectedSpace!['owner']}
+              </li>
               <img
                 className="rounded-full bg-cover"
-                src={selectedSpace["image"]}
-                alt={selectedSpace["მფლობელი"]}
+                src={selectedSpace!.image}
+                alt={selectedSpace!['owner']}
               />
             </div>
-            <li>
-              <b>მფლობელი:</b> {selectedSpace["მფლობელი"]}
-            </li>
-            <li>
-              <b>იჯარის ღირებულება:</b> {selectedSpace["იჯარის ღირებულება"]} ₾
-            </li>
-            <li>
-              <b>დენის გადასახადი:</b> {selectedSpace["დენის გადასახადი"]} ₾
-            </li>
-
-            <li>
-              <b>იჯარის დავალიანება:</b> {selectedSpace["იჯარის დავალიანება"]} ₾
-            </li>
-            <li>
-              <b>ფართობი:</b> {selectedSpace["ფართობი"]} მ²
-            </li>
+            <div className="flex flex-col gap-2">
+              <li>
+                <b>ID:</b> {selectedSpace!['id']}
+              </li>
+              <li>
+                <b>იჯარის ღირებულება:</b> {selectedSpace!['leasingCost']} ₾
+              </li>
+              <li>
+                <b>ელექტროობის გადასახადი:</b>{' '}
+                {selectedSpace!['electricityBill']} ₾
+              </li>
+              <li>
+                <b>იჯარის დავალიანება:</b> {selectedSpace!['leasingDebt']} ₾
+              </li>
+              <li>
+                <b>ფართობი:</b> {selectedSpace!['area']} მ²
+              </li>
+            </div>
           </ul>
         </div>
-      )}
-    </Drawer>
+      </Paper>
+    </ClickAwayListener>
   );
 }

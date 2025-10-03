@@ -1,5 +1,5 @@
 // context/MapFilterContext.tsx
-import React, { createContext, useContext, useMemo, useState } from "react";
+import React, { createContext, useContext, useMemo, useState } from 'react';
 
 export type AreaRange = [number, number];
 
@@ -19,7 +19,7 @@ export const MapFiltersProvider: React.FC<React.PropsWithChildren> = ({
 
   const value = useMemo(
     () => ({ areaRange, setAreaRange, limits }),
-    [areaRange]
+    [areaRange],
   );
   return (
     <MapFilterContext.Provider value={value}>
@@ -31,6 +31,6 @@ export const MapFiltersProvider: React.FC<React.PropsWithChildren> = ({
 export const useMapFilters = () => {
   const ctx = useContext(MapFilterContext);
   if (!ctx)
-    throw new Error("useMapFilters must be used within MapFiltersProvider");
+    throw new Error('useMapFilters must be used within MapFiltersProvider');
   return ctx;
 };
