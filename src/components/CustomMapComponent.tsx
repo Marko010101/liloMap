@@ -113,7 +113,7 @@ export default function CustomMapComponent() {
         });
         mapView.Labels.add(
           sp,
-          `${sp.name || sp.id} • ვალი: ${stocks.leasingDebt}`,
+          `${sp.name || sp.id} • ვალი: ${stocks.leasingDebt} ₾`,
         );
       });
     }

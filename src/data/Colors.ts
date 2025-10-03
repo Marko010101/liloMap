@@ -11,7 +11,7 @@ export const Colors = {
   },
 
   debt: {
-    none: '#e8f5e9', // 0  (very light green)
+    none: '#fff', // 0  (very light green)
     lt100: '#fee7d6', // 1–99  (peach)
     lt300: '#fdc8a2', // 100–299 (light orange)
     lt500: '#f89c74', // 300–499 (orange)

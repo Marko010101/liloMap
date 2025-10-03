@@ -6,6 +6,7 @@ import HeaderLogo from './HeaderLogo';
 import SectionSelector from './SectionSelector';
 import LeasingDebtLayer from './ui/LeasingDebtLayer';
 import ClearFilter from './ui/ClearFilter';
+import SearchField from './ui/SearchField';
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
@@ -50,18 +51,9 @@ const Sidebar = () => {
           <ClearFilter />
           <AreaRangeFilter />
           <SectionSelector />
-          <Box
-            sx={{
-              width: '100%',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <div className="mt-4 flex flex-col items-start gap-3">
-              <p className="text-base">იჯარის დავალიანების მიხედვით</p>
-              <LeasingDebtLayer />
-            </div>
-          </Box>
+          <LeasingDebtLayer />
+
+          {/* <SearchField /> */}
         </aside>
       </Paper>
 
