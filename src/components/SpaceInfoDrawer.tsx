@@ -35,17 +35,16 @@ export function SpaceInfoDrawer() {
           position: 'fixed',
           top: 0,
           right: 0,
-          height: '100vh',
           width: 320,
+          height: '100vh',
           borderTopLeftRadius: '20px',
           borderBottomLeftRadius: '20px',
-          p: 2,
           bgcolor: 'oklch(96.7% 0.003 264.542)',
           zIndex: (theme) => theme.zIndex.drawer,
           pointerEvents: 'none',
         }}
       >
-        <div style={{ pointerEvents: 'auto' }}>
+        <div className="h-screen p-5" style={{ pointerEvents: 'auto' }}>
           <div className="flex items-center justify-between px-0 py-2">
             <h2 className="text-lg font-semibold">ინფორმაცია</h2>
             <IconButton size="small" onClick={clearSelectedSpace}>
