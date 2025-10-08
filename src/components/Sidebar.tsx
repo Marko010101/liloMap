@@ -5,10 +5,9 @@ import AreaRangeFilter from './AreaRangeFilter';
 import HeaderLogo from './HeaderLogo';
 import SectionSelector from './SectionSelector';
 import ClearFilter from './ui/ClearFilter';
+import Direction from './ui/Direction';
 import LeasingDebtLayer from './ui/LeasingDebtLayer';
 import SearchField from './ui/SearchField';
-import OpenAI from 'openai';
-import Direction from './ui/Direction';
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
@@ -21,16 +20,6 @@ const Sidebar = () => {
     () => (open ? 0 : -(sidebarWidthNum - handleOffset)),
     [open, sidebarWidthNum],
   );
-  async function callAI() {
-    const client = new OpenAI();
-
-    const response = await client.responses.create({
-      model: 'gpt-5',
-      input: 'Write a short bedtime story about a unicorn.',
-    });
-
-    console.log('response.output_text', response.output_text);
-  }
 
   return (
     <Box
