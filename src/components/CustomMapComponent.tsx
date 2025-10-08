@@ -1,4 +1,4 @@
-import type { Path, Space, TClickPayload } from '@mappedin/mappedin-js';
+import type { Space, TClickPayload } from '@mappedin/mappedin-js';
 import { useMap, useMapViewEvent } from '@mappedin/react-sdk';
 import { useEffect, useMemo, useRef } from 'react';
 import { useDirection } from '../context/DirectionContext';
