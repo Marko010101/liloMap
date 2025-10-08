@@ -11,7 +11,9 @@ type DataChatProps = {
 };
 
 const client = new OpenAI({
-  apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+  // apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+  apiKey:
+    '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',
   dangerouslyAllowBrowser: true,
 });
 
