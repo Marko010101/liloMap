@@ -1,8 +1,8 @@
 import { Colors } from '../data/Colors';
-import stocksData from '../data/stocks';
+import storeData from '../data/store';
 
 export const matchStock = (id: string) =>
-  stocksData.find((s) => s.id === id) ?? null;
+  storeData.find((s) => s.id === id) ?? null;
 
 export function valueToBand(
   v?: number | null,

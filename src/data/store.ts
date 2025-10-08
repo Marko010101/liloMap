@@ -19,7 +19,7 @@ export type Stock = {
   sectionArea: string;
 };
 
-const stocksData: Stock[] = [
+const storeData: Stock[] = [
   {
     id: 's_626527195aff872b',
     leasingCost: 1100,
@@ -497,4 +497,4 @@ const stocksData: Stock[] = [
   },
 ];
 
-export default stocksData;
+export default storeData;

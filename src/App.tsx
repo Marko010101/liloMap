@@ -1,8 +1,11 @@
 import { MapView, useMapData } from '@mappedin/react-sdk';
+import { useState } from 'react';
 import CustomMapComponent from './components/CustomMapComponent';
+import DataChat from './components/DataChat';
 import MapSkeleton from './components/MapSkeleton';
 import Sidebar from './components/Sidebar';
 import { SpaceInfoDrawer } from './components/SpaceInfoDrawer';
+import ButtonAi from './components/ui/ButtonAi';
 
 export default function App() {
   const { isLoading, error, mapData } = useMapData({
@@ -10,13 +13,22 @@ export default function App() {
     secret: 'mis_2g9ST8ZcSFb5R9fPnsvYhrX3RyRwPtDGbMGweCYKEq385431022',
     mapId: '65c0ff7430b94e3fabd5bb8c',
   });
+
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
   if (isLoading) return <MapSkeleton />;
   if (error) return <div className="p-4 text-red-600">{error.message}</div>;
 
+  const toggleChatOpen = () => {
+    setIsChatOpen((isOpen) => !isOpen);
+  };
+
   return (
     <>
-      <SpaceInfoDrawer />
       <Sidebar />
+      <SpaceInfoDrawer />
+      <DataChat open={isChatOpen} onClose={() => setIsChatOpen(false)} />
+
       <div className="flex h-screen w-screen overflow-hidden bg-gray-100">
         <main className="relative flex-1">
           <div
@@ -36,6 +48,8 @@ export default function App() {
               <CustomMapComponent />
             </MapView>
           </div>
+
+          <ButtonAi onOpen={toggleChatOpen} isChatOpen={isChatOpen} />
         </main>
       </div>
     </>

@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useMemo, useState } from "react";
-import type stocksData from "../data/stocks";
+import React, { createContext, useContext, useMemo, useState } from 'react';
+import type storeData from '../data/store';
 
-// Type of one item from stocksData
-export type StockItem = (typeof stocksData)[number];
+// Type of one item from storeData
+export type StockItem = (typeof storeData)[number];
 
 type SelectedSpaceContextValue = {
   selectedSpace: StockItem | null;
@@ -11,14 +11,14 @@ type SelectedSpaceContextValue = {
 };
 
 const SelectedSpaceContext = createContext<SelectedSpaceContextValue | null>(
-  null
+  null,
 );
 
 export const SelectedSpaceProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [selectedSpace, setSelectedSpaceState] = useState<StockItem | null>(
-    null
+    null,
   );
 
   const setSelectedSpace = (space: StockItem | null) =>
@@ -27,7 +27,7 @@ export const SelectedSpaceProvider: React.FC<React.PropsWithChildren> = ({
 
   const value = useMemo(
     () => ({ selectedSpace, setSelectedSpace, clearSelectedSpace }),
-    [selectedSpace]
+    [selectedSpace],
   );
 
   return (
@@ -41,7 +41,7 @@ export const useSelectedSpace = (): SelectedSpaceContextValue => {
   const ctx = useContext(SelectedSpaceContext);
   if (!ctx) {
     throw new Error(
-      "useSelectedSpace must be used within a SelectedSpaceProvider"
+      'useSelectedSpace must be used within a SelectedSpaceProvider',
     );
   }
   return ctx;

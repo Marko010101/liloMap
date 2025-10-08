@@ -6,6 +6,7 @@ import { SelectedSpaceProvider } from './context/SelectedSpaceContext.tsx';
 import './index.css';
 import { SectionProvider } from './context/SectionContext.tsx';
 import { MapLayerProvider } from './context/MapLayerContext.tsx';
+import { DirectionProvider } from './context/DirectionContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -13,7 +14,9 @@ createRoot(document.getElementById('root')!).render(
       <MapFiltersProvider>
         <SectionProvider>
           <MapLayerProvider>
-            <App />
+            <DirectionProvider>
+              <App />
+            </DirectionProvider>
           </MapLayerProvider>
         </SectionProvider>
       </MapFiltersProvider>
